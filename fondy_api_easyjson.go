@@ -4,7 +4,6 @@ package fondy_api
 
 import (
 	json "encoding/json"
-
 	easyjson "github.com/hhh0pE/easyjson"
 	jlexer "github.com/hhh0pE/easyjson/jlexer"
 	jwriter "github.com/hhh0pE/easyjson/jwriter"
@@ -1405,4 +1404,101 @@ func (v *CreatePaymentRequest) UnmarshalJSON(data []byte) error {
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *CreatePaymentRequest) UnmarshalEasyJSON(l *jlexer.Lexer) {
 	easyjson7856a7d3DecodeGithubComHhh0pEFondyApi7(l, v)
+}
+func easyjson7856a7d3DecodeGithubComHhh0pEFondyApi8(in *jlexer.Lexer, out *CapturePrePurchaseRequest) {
+	isTopLevel := in.IsStart()
+	if in.IsNull() {
+		if isTopLevel {
+			in.Consumed()
+		}
+		in.Skip()
+		return
+	}
+	in.Delim('{')
+	for !in.IsDelim('}') {
+		key := in.UnsafeString()
+		in.WantColon()
+		if in.IsNull() {
+			in.Skip()
+			in.WantComma()
+			continue
+		}
+		switch key {
+		case "order_id":
+			out.OrderID = string(in.String())
+		case "amount":
+			if data := in.Raw(); in.Ok() {
+				in.AddError((out.Amount).UnmarshalJSON(data))
+			}
+		case "currency":
+			out.Currency = string(in.String())
+		default:
+			in.SkipRecursive()
+		}
+		in.WantComma()
+	}
+	in.Delim('}')
+	if isTopLevel {
+		in.Consumed()
+	}
+}
+func easyjson7856a7d3EncodeGithubComHhh0pEFondyApi8(out *jwriter.Writer, in CapturePrePurchaseRequest) {
+	out.RawByte('{')
+	first := true
+	_ = first
+	{
+		const prefix string = ",\"order_id\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.OrderID))
+	}
+	{
+		const prefix string = ",\"amount\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Raw((in.Amount).MarshalJSON())
+	}
+	{
+		const prefix string = ",\"currency\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.Currency))
+	}
+	out.RawByte('}')
+}
+
+// MarshalJSON supports json.Marshaler interface
+func (v CapturePrePurchaseRequest) MarshalJSON() ([]byte, error) {
+	w := jwriter.Writer{}
+	easyjson7856a7d3EncodeGithubComHhh0pEFondyApi8(&w, v)
+	return w.Buffer.BuildBytes(), w.Error
+}
+
+// MarshalEasyJSON supports easyjson.Marshaler interface
+func (v CapturePrePurchaseRequest) MarshalEasyJSON(w *jwriter.Writer) {
+	easyjson7856a7d3EncodeGithubComHhh0pEFondyApi8(w, v)
+}
+
+// UnmarshalJSON supports json.Unmarshaler interface
+func (v *CapturePrePurchaseRequest) UnmarshalJSON(data []byte) error {
+	r := jlexer.Lexer{Data: data}
+	easyjson7856a7d3DecodeGithubComHhh0pEFondyApi8(&r, v)
+	return r.Error()
+}
+
+// UnmarshalEasyJSON supports easyjson.Unmarshaler interface
+func (v *CapturePrePurchaseRequest) UnmarshalEasyJSON(l *jlexer.Lexer) {
+	easyjson7856a7d3DecodeGithubComHhh0pEFondyApi8(l, v)
 }

@@ -77,3 +77,19 @@ func (c *Client) RefundOrderAmount(orderID, currency string, amount float64) *Fi
 	}
 	return nil
 }
+
+func (c *Client) CapturePrePurchase(amount float64, orderID, currency string) *FinalResponse {
+	var ps CapturePrePurchaseRequest
+	ps.OrderID = orderID
+	ps.Currency = currency
+	ps.Amount = FondyFloat(amount)
+
+	res, err := SendRequest(c, &ps)
+	if err != nil {
+		c.lastError = err
+	}
+	if casted, ok := res.(*FinalResponse); ok {
+		return casted
+	}
+	return nil
+}
