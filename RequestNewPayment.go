@@ -26,6 +26,8 @@ type CreatePaymentRequest struct {
 
 	Lifetime FondySeconds `json:"lifetime,omitempty"`
 
+	PreAuth FondyBool `json:"pre_auth"`
+
 	ResponseURL       string `json:"response_url,omitempty"`
 	ServerCallbackURL string `json:"server_callback_url,omitempty"`
 
