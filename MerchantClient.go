@@ -61,3 +61,19 @@ func (c *Client) GetOrderStatus(orderID string) *FinalResponse {
 	ps.OrderID = orderID
 	return c.GetPaymentStatus(&ps)
 }
+
+func (c *Client) RefundOrderAmount(orderID, currency string, amount float64) *FinalResponse {
+	var ps RefundOrderRequest
+	ps.OrderID = orderID
+	ps.Currency = currency
+	ps.Amount = FondyFloat(amount)
+
+	res, err := SendRequest(c, &ps)
+	if err != nil {
+		c.lastError = err
+	}
+	if casted, ok := res.(*FinalResponse); ok {
+		return casted
+	}
+	return nil
+}
