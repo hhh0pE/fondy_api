@@ -4,6 +4,7 @@ package fondy_api
 
 import (
 	json "encoding/json"
+
 	easyjson "github.com/hhh0pE/easyjson"
 	jlexer "github.com/hhh0pE/easyjson/jlexer"
 	jwriter "github.com/hhh0pE/easyjson/jwriter"
@@ -1201,9 +1202,9 @@ func easyjson7856a7d3DecodeGithubComHhh0pEFondyApi7(in *jlexer.Lexer, out *Creat
 			if data := in.Raw(); in.Ok() {
 				in.AddError((out.Lifetime).UnmarshalJSON(data))
 			}
-		case "pre_auth":
+		case "preauth":
 			if data := in.Raw(); in.Ok() {
-				in.AddError((out.PreAuth).UnmarshalJSON(data))
+				in.AddError((out.Preauth).UnmarshalJSON(data))
 			}
 		case "response_url":
 			out.ResponseURL = string(in.String())
@@ -1350,14 +1351,14 @@ func easyjson7856a7d3EncodeGithubComHhh0pEFondyApi7(out *jwriter.Writer, in Crea
 		out.Raw((in.Lifetime).MarshalJSON())
 	}
 	{
-		const prefix string = ",\"pre_auth\":"
+		const prefix string = ",\"preauth\":"
 		if first {
 			first = false
 			out.RawString(prefix[1:])
 		} else {
 			out.RawString(prefix)
 		}
-		out.Raw((in.PreAuth).MarshalJSON())
+		out.Raw((in.Preauth).MarshalJSON())
 	}
 	if in.ResponseURL != "" {
 		const prefix string = ",\"response_url\":"
