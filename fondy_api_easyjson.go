@@ -280,7 +280,104 @@ func (v *URLResultResponse) UnmarshalJSON(data []byte) error {
 func (v *URLResultResponse) UnmarshalEasyJSON(l *jlexer.Lexer) {
 	easyjson7856a7d3DecodeGithubComHhh0pEFondyApi2(l, v)
 }
-func easyjson7856a7d3DecodeGithubComHhh0pEFondyApi3(in *jlexer.Lexer, out *PaymentByToken) {
+func easyjson7856a7d3DecodeGithubComHhh0pEFondyApi3(in *jlexer.Lexer, out *RefundOrderRequest) {
+	isTopLevel := in.IsStart()
+	if in.IsNull() {
+		if isTopLevel {
+			in.Consumed()
+		}
+		in.Skip()
+		return
+	}
+	in.Delim('{')
+	for !in.IsDelim('}') {
+		key := in.UnsafeString()
+		in.WantColon()
+		if in.IsNull() {
+			in.Skip()
+			in.WantComma()
+			continue
+		}
+		switch key {
+		case "order_id":
+			out.OrderID = string(in.String())
+		case "amount":
+			if data := in.Raw(); in.Ok() {
+				in.AddError((out.Amount).UnmarshalJSON(data))
+			}
+		case "currency":
+			out.Currency = string(in.String())
+		default:
+			in.SkipRecursive()
+		}
+		in.WantComma()
+	}
+	in.Delim('}')
+	if isTopLevel {
+		in.Consumed()
+	}
+}
+func easyjson7856a7d3EncodeGithubComHhh0pEFondyApi3(out *jwriter.Writer, in RefundOrderRequest) {
+	out.RawByte('{')
+	first := true
+	_ = first
+	{
+		const prefix string = ",\"order_id\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.OrderID))
+	}
+	{
+		const prefix string = ",\"amount\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Raw((in.Amount).MarshalJSON())
+	}
+	{
+		const prefix string = ",\"currency\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.Currency))
+	}
+	out.RawByte('}')
+}
+
+// MarshalJSON supports json.Marshaler interface
+func (v RefundOrderRequest) MarshalJSON() ([]byte, error) {
+	w := jwriter.Writer{}
+	easyjson7856a7d3EncodeGithubComHhh0pEFondyApi3(&w, v)
+	return w.Buffer.BuildBytes(), w.Error
+}
+
+// MarshalEasyJSON supports easyjson.Marshaler interface
+func (v RefundOrderRequest) MarshalEasyJSON(w *jwriter.Writer) {
+	easyjson7856a7d3EncodeGithubComHhh0pEFondyApi3(w, v)
+}
+
+// UnmarshalJSON supports json.Unmarshaler interface
+func (v *RefundOrderRequest) UnmarshalJSON(data []byte) error {
+	r := jlexer.Lexer{Data: data}
+	easyjson7856a7d3DecodeGithubComHhh0pEFondyApi3(&r, v)
+	return r.Error()
+}
+
+// UnmarshalEasyJSON supports easyjson.Unmarshaler interface
+func (v *RefundOrderRequest) UnmarshalEasyJSON(l *jlexer.Lexer) {
+	easyjson7856a7d3DecodeGithubComHhh0pEFondyApi3(l, v)
+}
+func easyjson7856a7d3DecodeGithubComHhh0pEFondyApi4(in *jlexer.Lexer, out *PaymentByToken) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -343,7 +440,7 @@ func easyjson7856a7d3DecodeGithubComHhh0pEFondyApi3(in *jlexer.Lexer, out *Payme
 		in.Consumed()
 	}
 }
-func easyjson7856a7d3EncodeGithubComHhh0pEFondyApi3(out *jwriter.Writer, in PaymentByToken) {
+func easyjson7856a7d3EncodeGithubComHhh0pEFondyApi4(out *jwriter.Writer, in PaymentByToken) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -479,27 +576,27 @@ func easyjson7856a7d3EncodeGithubComHhh0pEFondyApi3(out *jwriter.Writer, in Paym
 // MarshalJSON supports json.Marshaler interface
 func (v PaymentByToken) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjson7856a7d3EncodeGithubComHhh0pEFondyApi3(&w, v)
+	easyjson7856a7d3EncodeGithubComHhh0pEFondyApi4(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v PaymentByToken) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjson7856a7d3EncodeGithubComHhh0pEFondyApi3(w, v)
+	easyjson7856a7d3EncodeGithubComHhh0pEFondyApi4(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *PaymentByToken) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjson7856a7d3DecodeGithubComHhh0pEFondyApi3(&r, v)
+	easyjson7856a7d3DecodeGithubComHhh0pEFondyApi4(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *PaymentByToken) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjson7856a7d3DecodeGithubComHhh0pEFondyApi3(l, v)
+	easyjson7856a7d3DecodeGithubComHhh0pEFondyApi4(l, v)
 }
-func easyjson7856a7d3DecodeGithubComHhh0pEFondyApi4(in *jlexer.Lexer, out *GetPaymentStatusRequest) {
+func easyjson7856a7d3DecodeGithubComHhh0pEFondyApi5(in *jlexer.Lexer, out *GetPaymentStatusRequest) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -530,7 +627,7 @@ func easyjson7856a7d3DecodeGithubComHhh0pEFondyApi4(in *jlexer.Lexer, out *GetPa
 		in.Consumed()
 	}
 }
-func easyjson7856a7d3EncodeGithubComHhh0pEFondyApi4(out *jwriter.Writer, in GetPaymentStatusRequest) {
+func easyjson7856a7d3EncodeGithubComHhh0pEFondyApi5(out *jwriter.Writer, in GetPaymentStatusRequest) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -550,27 +647,27 @@ func easyjson7856a7d3EncodeGithubComHhh0pEFondyApi4(out *jwriter.Writer, in GetP
 // MarshalJSON supports json.Marshaler interface
 func (v GetPaymentStatusRequest) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjson7856a7d3EncodeGithubComHhh0pEFondyApi4(&w, v)
+	easyjson7856a7d3EncodeGithubComHhh0pEFondyApi5(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v GetPaymentStatusRequest) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjson7856a7d3EncodeGithubComHhh0pEFondyApi4(w, v)
+	easyjson7856a7d3EncodeGithubComHhh0pEFondyApi5(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *GetPaymentStatusRequest) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjson7856a7d3DecodeGithubComHhh0pEFondyApi4(&r, v)
+	easyjson7856a7d3DecodeGithubComHhh0pEFondyApi5(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *GetPaymentStatusRequest) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjson7856a7d3DecodeGithubComHhh0pEFondyApi4(l, v)
+	easyjson7856a7d3DecodeGithubComHhh0pEFondyApi5(l, v)
 }
-func easyjson7856a7d3DecodeGithubComHhh0pEFondyApi5(in *jlexer.Lexer, out *FinalResponse) {
+func easyjson7856a7d3DecodeGithubComHhh0pEFondyApi6(in *jlexer.Lexer, out *FinalResponse) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -687,7 +784,7 @@ func easyjson7856a7d3DecodeGithubComHhh0pEFondyApi5(in *jlexer.Lexer, out *Final
 		in.Consumed()
 	}
 }
-func easyjson7856a7d3EncodeGithubComHhh0pEFondyApi5(out *jwriter.Writer, in FinalResponse) {
+func easyjson7856a7d3EncodeGithubComHhh0pEFondyApi6(out *jwriter.Writer, in FinalResponse) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -1027,27 +1124,27 @@ func easyjson7856a7d3EncodeGithubComHhh0pEFondyApi5(out *jwriter.Writer, in Fina
 // MarshalJSON supports json.Marshaler interface
 func (v FinalResponse) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjson7856a7d3EncodeGithubComHhh0pEFondyApi5(&w, v)
+	easyjson7856a7d3EncodeGithubComHhh0pEFondyApi6(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v FinalResponse) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjson7856a7d3EncodeGithubComHhh0pEFondyApi5(w, v)
+	easyjson7856a7d3EncodeGithubComHhh0pEFondyApi6(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *FinalResponse) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjson7856a7d3DecodeGithubComHhh0pEFondyApi5(&r, v)
+	easyjson7856a7d3DecodeGithubComHhh0pEFondyApi6(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *FinalResponse) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjson7856a7d3DecodeGithubComHhh0pEFondyApi5(l, v)
+	easyjson7856a7d3DecodeGithubComHhh0pEFondyApi6(l, v)
 }
-func easyjson7856a7d3DecodeGithubComHhh0pEFondyApi6(in *jlexer.Lexer, out *CreatePaymentRequest) {
+func easyjson7856a7d3DecodeGithubComHhh0pEFondyApi7(in *jlexer.Lexer, out *CreatePaymentRequest) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -1104,6 +1201,10 @@ func easyjson7856a7d3DecodeGithubComHhh0pEFondyApi6(in *jlexer.Lexer, out *Creat
 			if data := in.Raw(); in.Ok() {
 				in.AddError((out.Lifetime).UnmarshalJSON(data))
 			}
+		case "pre_auth":
+			if data := in.Raw(); in.Ok() {
+				in.AddError((out.PreAuth).UnmarshalJSON(data))
+			}
 		case "response_url":
 			out.ResponseURL = string(in.String())
 		case "server_callback_url":
@@ -1118,7 +1219,7 @@ func easyjson7856a7d3DecodeGithubComHhh0pEFondyApi6(in *jlexer.Lexer, out *Creat
 		in.Consumed()
 	}
 }
-func easyjson7856a7d3EncodeGithubComHhh0pEFondyApi6(out *jwriter.Writer, in CreatePaymentRequest) {
+func easyjson7856a7d3EncodeGithubComHhh0pEFondyApi7(out *jwriter.Writer, in CreatePaymentRequest) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -1248,6 +1349,16 @@ func easyjson7856a7d3EncodeGithubComHhh0pEFondyApi6(out *jwriter.Writer, in Crea
 		}
 		out.Raw((in.Lifetime).MarshalJSON())
 	}
+	{
+		const prefix string = ",\"pre_auth\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Raw((in.PreAuth).MarshalJSON())
+	}
 	if in.ResponseURL != "" {
 		const prefix string = ",\"response_url\":"
 		if first {
@@ -1274,23 +1385,23 @@ func easyjson7856a7d3EncodeGithubComHhh0pEFondyApi6(out *jwriter.Writer, in Crea
 // MarshalJSON supports json.Marshaler interface
 func (v CreatePaymentRequest) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjson7856a7d3EncodeGithubComHhh0pEFondyApi6(&w, v)
+	easyjson7856a7d3EncodeGithubComHhh0pEFondyApi7(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v CreatePaymentRequest) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjson7856a7d3EncodeGithubComHhh0pEFondyApi6(w, v)
+	easyjson7856a7d3EncodeGithubComHhh0pEFondyApi7(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *CreatePaymentRequest) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjson7856a7d3DecodeGithubComHhh0pEFondyApi6(&r, v)
+	easyjson7856a7d3DecodeGithubComHhh0pEFondyApi7(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *CreatePaymentRequest) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjson7856a7d3DecodeGithubComHhh0pEFondyApi6(l, v)
+	easyjson7856a7d3DecodeGithubComHhh0pEFondyApi7(l, v)
 }
