@@ -1,6 +1,7 @@
 package fondy_api
 
 import (
+	"encoding/json"
 	"fmt"
 
 	"time"
@@ -76,6 +77,8 @@ type FinalResponse struct {
 	ResponseStatus string   `json:"response_status"`
 	ErrorMessage   string   `json:"error_message"`
 	ErrorCode      FondyInt `json:"error_code"`
+
+	AdditionalInfo json.RawMessage `json:"additional_info"`
 }
 
 func (uad *FinalResponse) MarshalLogObject(e zapcore.ObjectEncoder) error {

@@ -5,7 +5,6 @@ import (
 
 	"bytes"
 
-	"fmt"
 	"io"
 
 	"github.com/hhh0pE/easyjson"
@@ -72,7 +71,6 @@ func SendRequest(c *Client, r Request) (interface{}, error) {
 	reader := io.TeeReader(resp.Body, &respBuff)
 	respObject := r.ResponseObject()
 	if err := easyjson.UnmarshalFromReader(reader, respObject); err != nil {
-		fmt.Println("rawMsg", respBuff.String())
 		return nil, errors.Wrap(err, "Cannot unmarshal response")
 	}
 
