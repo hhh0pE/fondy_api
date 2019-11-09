@@ -61,6 +61,7 @@ func SendRequest(c *Client, r Request) (interface{}, error) {
 	if generate_err != nil {
 		return nil, generate_err
 	}
+	req.Header.Set("Content-Type", "application/json")
 
 	resp, req_err := http.DefaultClient.Do(req)
 	if req_err != nil {
