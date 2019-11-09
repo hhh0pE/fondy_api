@@ -17,7 +17,6 @@ func SignRequestBytes(merchantID int, password string, msgBytes *[]byte) error {
 	if msgBytes == nil {
 		return errors.New("nil msgBytes")
 	}
-	fmt.Println("SignRequestBytes", string(*msgBytes))
 
 	*msgBytes, _ = jsonparser.Set(*msgBytes, []byte(strconv.Itoa(merchantID)), "merchant_id")
 
@@ -48,7 +47,7 @@ func SignRequestBytes(merchantID int, password string, msgBytes *[]byte) error {
 	}
 
 	strToSign := strings.Join(signValues, "|")
-	fmt.Println("StrToSign", strToSign)
+
 	sig := sha1.New()
 	fmt.Fprint(sig, strToSign)
 	signature := hex.EncodeToString(sig.Sum(nil))
