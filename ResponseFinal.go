@@ -4,8 +4,6 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"time"
-
 	"github.com/pkg/errors"
 	"go.uber.org/zap/zapcore"
 )
@@ -107,7 +105,7 @@ func (uad *FinalResponse) MarshalLogObject(e zapcore.ObjectEncoder) error {
 	e.AddFloat64("SettlementAmount", float64(uad.SettlementAmount))
 	e.AddString("SettlementCurrency", uad.SettlementCurrency)
 
-	e.AddTime("OrderTime", time.Time(uad.OrderTime))
+	e.AddTime("OrderTime", uad.OrderTime.Time)
 	e.AddString("SettlementDate", uad.SettlementDate)
 	e.AddString("Eci", uad.Eci)
 
@@ -125,7 +123,7 @@ func (uad *FinalResponse) MarshalLogObject(e zapcore.ObjectEncoder) error {
 	e.AddString("ResponseStatus", uad.ResponseStatus)
 	e.AddString("ErrorMessage", uad.ErrorMessage)
 
-	e.AddTime("RectokenLifetime", time.Time(uad.RectokenLifetime))
+	e.AddTime("RectokenLifetime", uad.RectokenLifetime.Time)
 
 	e.AddInt64("ErrorCode", int64(uad.ErrorCode))
 

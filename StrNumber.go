@@ -46,6 +46,7 @@ func (sn *FondyFloat) UnmarshalJSON(val []byte) error {
 	if parsing_err != nil {
 		return errors.Wrap(parsing_err, "FondyFloat ParseInt error")
 	}
+	fmt.Println("fondyFloat", parsedNum)
 	*sn = FondyFloat(convertFondyNumberToFloat(parsedNum))
 
 	return nil
@@ -102,7 +103,9 @@ func (sn FondySeconds) MarshalJSON() ([]byte, error) {
 	return []byte(strconv.FormatInt(int64(time.Duration(sn)/time.Second), 10)), nil
 }
 
-type FondyTime time.Time
+type FondyTime struct {
+	time.Time
+}
 
 func (sn *FondyTime) UnmarshalJSON(val []byte) error {
 	valStr := strings.Trim(string(val), `"`)
@@ -114,11 +117,10 @@ func (sn *FondyTime) UnmarshalJSON(val []byte) error {
 	if parsing_err != nil {
 		return errors.Wrap(parsing_err, "FondyTime time.Parse("+valStr+") error")
 	}
-	*sn = FondyTime(parsedTime)
+	sn.Time = parsedTime
 
 	return nil
 }
 func (sn FondyTime) MarshalJSON() ([]byte, error) {
-	t := time.Time(sn)
-	return []byte(`"` + t.Format("02.01.2006 15:04:05") + `"`), nil
+	return []byte(`"` + sn.Format("02.01.2006 15:04:05") + `"`), nil
 }
