@@ -430,6 +430,10 @@ func easyjson7856a7d3DecodeGithubComHhh0pEFondyApi4(in *jlexer.Lexer, out *Payme
 			out.CVV2 = string(in.String())
 		case "client_ip":
 			out.ClientIP = string(in.String())
+		case "preauth":
+			if data := in.Raw(); in.Ok() {
+				in.AddError((out.Preauth).UnmarshalJSON(data))
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -569,6 +573,16 @@ func easyjson7856a7d3EncodeGithubComHhh0pEFondyApi4(out *jwriter.Writer, in Paym
 			out.RawString(prefix)
 		}
 		out.String(string(in.ClientIP))
+	}
+	{
+		const prefix string = ",\"preauth\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Raw((in.Preauth).MarshalJSON())
 	}
 	out.RawByte('}')
 }
@@ -773,6 +787,10 @@ func easyjson7856a7d3DecodeGithubComHhh0pEFondyApi6(in *jlexer.Lexer, out *Final
 		case "error_code":
 			if data := in.Raw(); in.Ok() {
 				in.AddError((out.ErrorCode).UnmarshalJSON(data))
+			}
+		case "additional_info":
+			if data := in.Raw(); in.Ok() {
+				in.AddError((out.AdditionalInfo).UnmarshalJSON(data))
 			}
 		default:
 			in.SkipRecursive()
@@ -1117,6 +1135,16 @@ func easyjson7856a7d3EncodeGithubComHhh0pEFondyApi6(out *jwriter.Writer, in Fina
 			out.RawString(prefix)
 		}
 		out.Raw((in.ErrorCode).MarshalJSON())
+	}
+	{
+		const prefix string = ",\"additional_info\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Raw((in.AdditionalInfo).MarshalJSON())
 	}
 	out.RawByte('}')
 }

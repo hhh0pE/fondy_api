@@ -25,6 +25,8 @@ type PaymentByToken struct {
 
 	ClientIP string `json:"client_ip,omitempty"`
 
+	Preauth FondyBool `json:"preauth"`
+
 	response finalResponseWrapper
 }
 
