@@ -62,10 +62,15 @@ func ReadFinalResponseFromRequest(r *http.Request) (*FinalResponse, error) {
 }
 
 func ReadFinalResponseFromReader(reader io.Reader) (*FinalResponse, error) {
+	inputBytes, read_err := ioutil.ReadAll(reader)
+	if read_err != nil {
+		return nil, errors.Wrap(read_err, "Cannot read data from reader")
+	}
 
-	inputBytes, _ := ioutil.ReadAll(reader)
-
-	responseBytes, _, _, _ := jsonparser.Get(inputBytes, "response")
+	responseBytes, _, _, getting_err := jsonparser.Get(inputBytes, "response")
+	if getting_err != nil {
+		return nil, errors.Wrap(getting_err, "Cannot get response from inputBytes")
+	}
 	if len(responseBytes) > 0 {
 		inputBytes = responseBytes
 	}
