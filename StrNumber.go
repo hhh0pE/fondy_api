@@ -46,7 +46,7 @@ func (sn *FondyFloat) UnmarshalJSON(val []byte) error {
 	if parsing_err != nil {
 		return errors.Wrap(parsing_err, "FondyFloat ParseInt error")
 	}
-	fmt.Println("fondyFloat", parsedNum)
+
 	*sn = FondyFloat(convertFondyNumberToFloat(parsedNum))
 
 	return nil
